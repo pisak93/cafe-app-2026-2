@@ -1,4 +1,5 @@
 import { View } from "react-native";
+import CarruselPos from "./CarruselPos";
 
 function Carrusel({children}){
     return(
