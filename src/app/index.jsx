@@ -17,24 +17,18 @@ function Index() {
 
 const [productos,setProductos]= useState([]);
 
-const [filtro, setFiltro]= useState(0);
+
 
 
 async function getProductos(){
 
-   const params = {};
+   
 
-    if (filtro !== "") {
-        params.precio = "gte."+filtro;
-    }
 
 const response = await axios.get("https://dofxzdlhadyokehrkxoc.supabase.co/rest/v1/productos",
   {
     headers:{
       apikey:"sb_publishable_D9AUiclRIM8Rw2dE3-4ZKg_LC83mB12"
-    },
-    params:{
-      precio:params
     }
   }
 );
@@ -58,7 +52,7 @@ useEffect(function(){
         clearTimeout(timeout);
     };
 
-},[filtro]);
+},[]);
  
 
  console.log(productos);
@@ -81,7 +75,7 @@ useEffect(function(){
            />
         </Slider>
       </Seccion>
-      <Filtro label={"Precio mínimo"} valor={filtro} cambiarValor={setFiltro} />
+   
 
       
 
