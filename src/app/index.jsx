@@ -2,6 +2,8 @@ import { FlatList, Text, View } from "react-native";
 import Seccion from "../../assets/Components/Seccion";
 import Slider from "../../assets/Components/Slider";
 import ProductoItem from "../../assets/Components/ProductoItem";
+import { slider } from "../../assets/Styles/Stylesheet";
+import Filtro from "../../assets/Components/Filtro";
 
 
 
@@ -9,17 +11,30 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 
 
+
 function Index() {
 
 
 const [productos,setProductos]= useState([]);
 
+const [filtro, setFiltro]= useState(0);
+
 
 async function getProductos(){
+
+   const params = {};
+
+    if (filtro !== "") {
+        params.precio = "gte."+filtro;
+    }
+
 const response = await axios.get("https://dofxzdlhadyokehrkxoc.supabase.co/rest/v1/productos",
   {
     headers:{
       apikey:"sb_publishable_D9AUiclRIM8Rw2dE3-4ZKg_LC83mB12"
+    },
+    params:{
+      precio:params
     }
   }
 );
@@ -35,10 +50,15 @@ useEffect(function(){
     setProductos(data);
   }
  
+  const timeout = setTimeout(() => {
+        traerProductos();
+    }, 500);
 
-  traerProductos();
+    return () => {
+        clearTimeout(timeout);
+    };
 
-},[]);
+},[filtro]);
  
 
  console.log(productos);
@@ -49,10 +69,11 @@ useEffect(function(){
       <Seccion titulo={"Promociones"}>
         <Slider>
         
-           <FlatList
+           <FlatList 
+            contentContainerStyle={slider.contenedor}
            data={productos}
            renderItem={function ({item}){
-            return <ProductoItem nombre={item.nombre} precio={item.precio} complemento={item.valor_por_gramo} key={item.id_producto} />
+            return <ProductoItem nombre={item.nombre} precio={item.precio} complemento={item.valor_por_gramo} imagen={item.nombre_imagen} key={item.id_producto} />
            }}
            keyExtractor={function (item){return item.id_producto.toString()}}
            horizontal
@@ -60,6 +81,9 @@ useEffect(function(){
            />
         </Slider>
       </Seccion>
+      <Filtro label={"Precio mínimo"} valor={filtro} cambiarValor={setFiltro} />
+
+      
 
 
 

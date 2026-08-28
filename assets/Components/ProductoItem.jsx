@@ -10,11 +10,15 @@ precio = "$ "+precio;
     if(complemento){
         complemento="$ "+ complemento+" /g"
     }
-    
+  
+
+    imagen="https://dofxzdlhadyokehrkxoc.supabase.co/storage/v1/object/public/productos/"+imagen;
+
+    console.log(imagen);
     return(
         <View style={producto.contenedor}>
             <Boton label={"+"} />
-            <Image source={imagen} />
+            <Image source={{uri:imagen}} style={producto.imagen} />
             <View>
                 <Text>{nombre}</Text>
                 <Text>{precio}</Text>
