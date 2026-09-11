@@ -1,0 +1,15 @@
+Operador	Significado	                        Cómo se escribe en Axios
+
+eq	        igual	                            precio: "eq.25000"
+neq	        diferente	                        precio: "neq.25000"
+gt	        mayor que	                        precio: "gt.25000"
+gte	        mayor o igual	                    precio: "gte.25000"
+lt	        menor que	                        precio: "lt.25000"
+lte	        menor o igual	                    precio: "lte.25000"
+like	    búsqueda por patrón	                nombre: "like.*Cafe*"
+ilike	    búsqueda sin distinguir mayúsculas	nombre: "ilike.*cafe*"
+in	        pertenece a varios valores	        productor: "in.(1,2,3)"
+is	        null, true o false	                nombre: "is.null"
+and	        todas las condiciones	            and: "(precio.gte.20000,precio.lte.50000)"
+or	        cualquiera de las condiciones	    or: "(precio.lt.20000,precio.gt.50000)"
+not	        negar una condición	                precio: "not.eq.25000"
