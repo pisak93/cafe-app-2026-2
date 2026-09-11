@@ -4,7 +4,7 @@ import Slider from "../../assets/Components/Slider";
 import ProductoItem from "../../assets/Components/ProductoItem";
 import { slider } from "../../assets/Styles/Stylesheet";
 import Filtro from "../../assets/Components/Filtro";
-
+import api from "../../assets/api/axios";
 
 
 import axios from "axios";
@@ -28,11 +28,8 @@ async function getProductos(){
         params.precio = "gte."+filtro;
     }
 
-const response = await axios.get("https://dofxzdlhadyokehrkxoc.supabase.co/rest/v1/productos",
+const response = await axios.get("/productos",
   {
-    headers:{
-      apikey:"sb_publishable_D9AUiclRIM8Rw2dE3-4ZKg_LC83mB12"
-    },
     params:{
       precio:params
     }
