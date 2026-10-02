@@ -2,7 +2,7 @@ import { View, Text, Image } from "react-native";
 import Boton from "./Boton";
 import {producto, general} from "../Styles/Stylesheet";
 
-function ProductoItem ({nombre,precio,complemento,imagen}){
+function ProductoItem ({nombre,precio,complemento,imagen,productor}){
  
     if(precio){
 precio = "$ "+precio;
@@ -23,6 +23,7 @@ precio = "$ "+precio;
                 <Text>{nombre}</Text>
                 <Text>{precio}</Text>
                 <Text>{complemento}</Text>
+                <Text>{productor}</Text>
             </View>
         </View>
     )

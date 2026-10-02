@@ -28,9 +28,10 @@ async function getProductos(){
         params.precio = "gte."+filtro;
     }
 
-const response = await axios.get("/productos",
+const response = await api.get("/productos",
   {
     params:{
+      select:"id_producto,nombre,precio,nombre_imagen,valor_por_gramo,productor(nombre)",
       precio:params
     }
   }
@@ -70,7 +71,7 @@ useEffect(function(){
             contentContainerStyle={slider.contenedor}
            data={productos}
            renderItem={function ({item}){
-            return <ProductoItem nombre={item.nombre} precio={item.precio} complemento={item.valor_por_gramo} imagen={item.nombre_imagen} key={item.id_producto} />
+            return <ProductoItem nombre={item.nombre} precio={item.precio} complemento={item.valor_por_gramo} imagen={item.nombre_imagen} productor={item.productor.nombre} key={item.id_producto} />
            }}
            keyExtractor={function (item){return item.id_producto.toString()}}
            horizontal
